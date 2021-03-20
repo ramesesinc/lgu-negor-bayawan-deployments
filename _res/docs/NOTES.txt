@@ -1,7 +1,7 @@
 [Ubuntu Server]
-IP   : 
-User : 
-Pass : 
+IP   : 192.168.50.233
+User : etracs255
+Pass : etracsservices
 
 
 [DB Server]
@@ -11,18 +11,18 @@ Pass :
 
 
 [Webmin]
-User : 
-Pass : 
+User : etracs255
+Pass : etracsservices
 
 
 [Portainer]
-User :  admin
-Pass :  p@ssw0rd
+User : admin
+Pass : p@ssw0rd
 
 
 [Samba Shared Folder]
-User : 
-Pass : 
+User : etracs255
+Pass : p@ssw0rd
 
 
 [Docker Images]
@@ -35,4 +35,8 @@ docker pull ramesesinc/gdx-client:1.03.01
 docker pull ramesesinc/queue-server:255.02.002
 docker pull ramesesinc/mail-server:latest
 docker pull ramesesinc/local-epayment-server:2.5.01.02.04
-docker pull ramesesinc/etracs-server-municipality:2.5.03.02.01
+docker pull ramesesinc/etracs-server-city:2.5.03.02.01
+
+
+[GitHub Repo]
+git clone https://github.com/ramesesinc/lgu-negor-bayawan-deployments.git
