@@ -5,9 +5,9 @@ Pass : etracsservices
 
 
 [DB Server]
-IP   : 
-User :
-Pass : 
+IP   : 192.168.50.233
+User : root
+Pass : P@ssw0rd#
 
 
 [Webmin]
