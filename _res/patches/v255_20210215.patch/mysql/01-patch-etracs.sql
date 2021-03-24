@@ -1,8 +1,11 @@
+use etracs25_bayawan;
+
+
 /* 254032-03018 */
 
 alter table faasbacktax modify column tdno varchar(25) null
 ;
-drop table cashreceiptpayment_eor
+drop table if exists cashreceiptpayment_eor
 ;
 
 /* 254032-03018 */
@@ -3735,7 +3738,7 @@ create index ix_rptledger_prevtdno on rptledger(prevtdno);
 
   
 alter table rptledger modify column owner_name varchar(1500) not null;
-create index ix_rptledger_owner_name on rptledger(owner_name);
+create index ix_rptledger_owner_name on rptledger(owner_name(255));
   
 /* SUBLEDGER : add beneficiary info */
 
@@ -3972,31 +3975,31 @@ update rptpayment_share set iscommon = 0 where iscommon is null
 ;
 
 
-CREATE TABLE `cashreceipt_rpt_share_forposting` (
-  `objid` varchar(50) NOT NULL,
-  `receiptid` varchar(50) NOT NULL,
-  `rptledgerid` varchar(50) NOT NULL,
-  `txndate` datetime NOT NULL,
-  `error` int(255) NOT NULL,
-  `msg` text,
-  PRIMARY KEY (`objid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
-;
+-- CREATE TABLE `cashreceipt_rpt_share_forposting` (
+--   `objid` varchar(50) NOT NULL,
+--   `receiptid` varchar(50) NOT NULL,
+--   `rptledgerid` varchar(50) NOT NULL,
+--   `txndate` datetime NOT NULL,
+--   `error` int(255) NOT NULL,
+--   `msg` text,
+--   PRIMARY KEY (`objid`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+-- ;
 
 
-create UNIQUE index `ux_receiptid_rptledgerid` on cashreceipt_rpt_share_forposting (`receiptid`,`rptledgerid`)
-;
-create index `fk_cashreceipt_rpt_share_forposing_rptledger` on cashreceipt_rpt_share_forposting (`rptledgerid`)
-;
-create index `fk_cashreceipt_rpt_share_forposing_cashreceipt` on cashreceipt_rpt_share_forposting (`receiptid`)
-;
+-- create UNIQUE index `ux_receiptid_rptledgerid` on cashreceipt_rpt_share_forposting (`receiptid`,`rptledgerid`)
+-- ;
+-- create index `fk_cashreceipt_rpt_share_forposing_rptledger` on cashreceipt_rpt_share_forposting (`rptledgerid`)
+-- ;
+-- create index `fk_cashreceipt_rpt_share_forposing_cashreceipt` on cashreceipt_rpt_share_forposting (`receiptid`)
+-- ;
 
-alter table cashreceipt_rpt_share_forposting add CONSTRAINT `fk_cashreceipt_rpt_share_forposing_rptledger` 
-FOREIGN KEY (`rptledgerid`) REFERENCES `rptledger` (`objid`)
-;
-alter table cashreceipt_rpt_share_forposting add CONSTRAINT `fk_cashreceipt_rpt_share_forposing_cashreceipt` 
-FOREIGN KEY (`receiptid`) REFERENCES `cashreceipt` (`objid`)
-;
+-- alter table cashreceipt_rpt_share_forposting add CONSTRAINT `fk_cashreceipt_rpt_share_forposing_rptledger` 
+-- FOREIGN KEY (`rptledgerid`) REFERENCES `rptledger` (`objid`)
+-- ;
+-- alter table cashreceipt_rpt_share_forposting add CONSTRAINT `fk_cashreceipt_rpt_share_forposing_cashreceipt` 
+-- FOREIGN KEY (`receiptid`) REFERENCES `cashreceipt` (`objid`)
+-- ;
 
 
 
@@ -4010,15 +4013,14 @@ FOREIGN KEY (`receiptid`) REFERENCES `cashreceipt` (`objid`)
 alter table bldgrpu add dtconstructed date;
 
 
-alter table sys_wf_node 
-	add tracktime int,
-	add ui text,
-	add properties text,
-;
+-- alter table sys_wf_node add tracktime int;
+-- alter table sys_wf_node add ui text;
+-- alter table sys_wf_node add properties text;
 
-alter table sys_wf_transition
-	add ui text
-;
+
+-- alter table sys_wf_transition
+-- 	add ui text
+-- ;
 
 
 delete from sys_wf_transition where processname = 'batchgr'
